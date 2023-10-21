@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc8c9849dc7fd54e8018199dd316ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainInfos: {fileID: 11400000, guid: 31d9825eb84c9e34688faa2d4b185bea, type: 2}
+  terrainInfos: {fileID: 11400000, guid: 1fe774d3e98b36d439d8f347a529439c, type: 2}
   terrainLayers:
   - {fileID: 8574412962073106934, guid: a5b37f3d6310f7b4aaa13aa0d5c5b11c, type: 2}
   treesInfos:
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1

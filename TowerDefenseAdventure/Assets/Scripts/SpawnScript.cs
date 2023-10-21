@@ -19,12 +19,12 @@ public class SpawnScript : MonoBehaviour
     private Terrain terrain;
     [SerializeField] private int spawnPointsNumber = 1;//à récupérer en fct du nb de waves et du niveau
 
-    void Start()
+    IEnumerator Start()
     {
         //terrain instantiaton
         terrain = Instantiate(terrainPrefab);
-        //Vector3 middlePos = new(terrain.terrainData.size.x/2, terrain.terrainData.size.y/2);
         //base instantiation
+        yield return new WaitForSeconds(1);
         Vector3 basePosition = new(0,terrain.terrainData.GetHeight(128,128),0);
         baseBuilding = Instantiate(baseBuildingPrefab,basePosition, transform.rotation);
         //Player Instantiation
@@ -36,7 +36,13 @@ public class SpawnScript : MonoBehaviour
         }
         
         StartCoroutine(SpawnEnemies());
-
+    }
+    void Update()//DEBUG
+    {
+        float posY = terrain.transform.position.y;
+        float posyZ = terrain.transform.position.z;
+        float newPosX = terrain.transform.position.x + Time.deltaTime;
+        terrain.transform.position.Set(newPosX, posY, posyZ);
     }
     IEnumerator SpawnEnemies()
     {
@@ -56,21 +62,16 @@ public class SpawnScript : MonoBehaviour
 
     private Vector3 FindSpawnPosition()
     {
-        Debug.Log("dfgasgda");
         float angle = Random.Range(0.0f, 2*Mathf.PI);
         float minDist = baseBuilding.GetNonSpawnRange();
         float maxDist = terrain.terrainData.size.x / 2; //demi coté du terrain (potentiellement changer en variable)
         float dist = Random.Range(minDist,maxDist);
         Vector3 relativePos = new(Mathf.Cos(angle)*dist,0, Mathf.Sin(angle)*dist);
         Vector3 absolutePos = relativePos + baseBuilding.transform.position;
-        absolutePos.y = terrain.terrainData.GetHeight(Mathf.RoundToInt(absolutePos.x), Mathf.RoundToInt(absolutePos.z));
+        Ray ray = new(new Vector3(absolutePos.x,200,absolutePos.z), Vector3.down);
+        if(Physics.Raycast(ray, out RaycastHit hit) && hit.collider.CompareTag("Floor"))
+            return hit.point;
           
-        return absolutePos;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return FindSpawnPosition();
     }
 }

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _lookXLimit = 90.0f;
     [SerializeField]
-    private float _gravity = 20.0f;
+    private float _gravity = 10.0f;
 
     private CameraBehaviour _cameraBehaviour;
     private Camera _playerCamera;

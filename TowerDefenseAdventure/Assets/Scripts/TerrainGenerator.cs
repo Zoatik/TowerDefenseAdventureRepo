@@ -18,7 +18,7 @@ public class TerrainGenerator : MonoBehaviour
     private NavMeshSurface navMeshSurface;
     private List<GameObject> trees = new();
     private TerrainPainter terrainPainter;
-    void Start()
+    void Awake()
     {
         //terrain
         terrainPainter = GetComponent<TerrainPainter>();
@@ -44,11 +44,10 @@ public class TerrainGenerator : MonoBehaviour
         baseTerrainData.SetHeights(0,0,heightValues);
 
         //terrain Painting
-        /*terrainPainter.AssignActiveTerrains();
+        terrainPainter.AssignActiveTerrains();
         terrainPainter.CreateSettingsForLayer(terrainLayers[0]);
-        //terrainPainter.layerSettings.Add()
         terrainPainter.SetTerrainLayers();
-        terrainPainter.autoRepaint = false;*/
+        terrainPainter.autoRepaint = false;
 
         //arbres
         GenerateTrees(heightValues);
@@ -58,7 +57,6 @@ public class TerrainGenerator : MonoBehaviour
     //Algo spawn des arbres
     private void GenerateTrees(float[,] heightValues)
     {
-        Debug.Log("heightValue : " + heightValues.GetLength(0)*heightValues.GetLength(1));
         if(treesDensity == 0.0f)
             return;
         int step = Mathf.RoundToInt(8 / treesDensity);
@@ -78,7 +76,6 @@ public class TerrainGenerator : MonoBehaviour
                         mostLikelyTreeIndex = i;
                     }
                 }
-                //Debug.Log(bestTreeProbabilityScore);
                 if(bestTreeProbabilityScore > treeTreshHold )
                 {
                     
@@ -127,9 +124,9 @@ public class TerrainGenerator : MonoBehaviour
         float scale = terrainInfos.heightsScale;
         float xCoord = (float)x / terrainInfos.width * scale;
         float yCoord = (float)y / terrainInfos.height * scale;
-        float depthScale = point.magnitude;
+        float dist = point.magnitude;
         float maxRange = terrainInfos.width / Mathf.Sqrt(2);     
-        depthScale /= maxRange;
+        float depthScale = dist / maxRange;
         depthScale *= terrainInfos.distanceIntensity;
 
         depthScale = Mathf.Exp(depthScale)/Mathf.Exp(terrainInfos.distanceIntensity);

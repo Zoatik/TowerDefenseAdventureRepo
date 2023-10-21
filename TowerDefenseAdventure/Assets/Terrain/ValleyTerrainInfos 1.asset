@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ab21aa4351a88242a7d573317c9b52f, type: 3}
-  m_Name: DefaultTerrainInfos
+  m_Name: ValleyTerrainInfos 1
   m_EditorClassIdentifier: 
   height: 256
   width: 256
-  depth: 83.6
+  depth: 100
   heightsScale: 10
-  intensityOffset: 72.3
-  distanceIntensity: 5.5
+  intensityOffset: 76.2
+  distanceIntensity: 1.58

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Base : MonoBehaviour
 {
     public Transform playerSpawnPoint;
     private float _health = 100f;
-    private float _nonSpawnRange = 20f;
+    private float _nonSpawnRange = 40f;
 
     public void SetHealth(float health)
     {
