@@ -1,17 +1,21 @@
+using System.Dynamic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
     
     [SerializeField]
-    private PlayerInfosScript _playerInfos;
+    private PlayerInfos playerInfos;
+    public InputManager inputManager;
 
-    public void SetPlayerInfos(PlayerInfosScript playerInfos)
+    
+    public void SetPlayerInfos(PlayerInfos playerInfos)
     {
-        _playerInfos = playerInfos;
+        this.playerInfos = playerInfos;
     }
-    public PlayerInfosScript GetPlayerInfos()
+    public PlayerInfos GetPlayerInfos()
     {
-        return _playerInfos;
+        return playerInfos;
     }
 
     void Start()

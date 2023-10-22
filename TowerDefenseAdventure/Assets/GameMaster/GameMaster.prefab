@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9091053169391263725}
   - component: {fileID: 781904020328897435}
+  - component: {fileID: 3991202059956456230}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -57,3 +58,15 @@ MonoBehaviour:
   terrainPrefab: {fileID: 1134502758429059222, guid: 57bec2ecb52d7794981fd404f13a304f,
     type: 3}
   spawnPointsNumber: 1
+--- !u!114 &3991202059956456230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4389780793069290315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9c204085e32f743a212e55f0e3fbec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private KeyBindings keyBindings;
+    public KeyBindings keyBindings;
     public KeyCode GetKeyFromAction(KeyBindingActions keyBindingAction)
     {
         foreach (var keyBinding in keyBindings.keyBindings)

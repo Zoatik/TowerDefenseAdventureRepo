@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private Camera _playerCamera;
     private TopDownCombat _topDownCombat;
 
-    private PlayerInfosScript _playerInfos;
+    private PlayerInfos _playerInfos;
 
     private bool _canMove = true;
     private bool _fpsMode = true;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     float rotationX = 0;
     private float rotationY = 0;
 
-    void Start()
+    void Awake()
     {
         characterController = GetComponent<CharacterController>();
         agent = GetComponent<NavMeshAgent>();
@@ -45,8 +45,10 @@ public class PlayerController : MonoBehaviour
         _playerInfos = GetComponent<Player>().GetPlayerInfos();
         _playerCamera = Instantiate(_cameraPrefab);
         _cameraBehaviour = _playerCamera.GetComponent<CameraBehaviour>();
-
-        agent.speed = _playerInfos.runSpeed;
+    }
+    void Start()
+    {
+        agent.speed = _playerInfos.playerData.runSpeed;
         // Lock cursor
         if(_fpsMode)
         {
