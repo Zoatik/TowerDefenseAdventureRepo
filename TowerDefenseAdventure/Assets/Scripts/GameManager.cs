@@ -1,24 +1,71 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     private SpawnScript spawnScript;
+    private string currentSceneName;
+    private Canvas HUD;
     
-    
+
     void Awake()
     {
-        spawnScript = GetComponent<SpawnScript>();
+        if(instance == null)
+        {
+            instance = this;
+            spawnScript = GetComponent<SpawnScript>();
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            DontDestroyOnLoad(this);
+        }
+        else {Destroy(this);}
     }
 
-    void Start()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        DontDestroyOnLoad(this);
-        StartCoroutine(spawnScript.Spawn());// a mettre au debut de game TD
+        currentSceneName = scene.name;
+        Debug.Log("new scene loaded : " + currentSceneName);
+
+        if(currentSceneName == "MainMenuScene")
+            MainMenuStart();    
+        
+        else if(currentSceneName == "LobbyScene")
+            LobbyStart();
+            
+        else if(currentSceneName == "GameScene")   
+            GameStart();
+
+        HUD = GetComponent<Canvas>();
+    }
+
+    private void MainMenuStart()
+    {
+        spawnScript.enabled = false;
+    }
+    private void LobbyStart()
+    {
+        spawnScript.enabled = true;
+        TerrainInfos terrainInfos =  TerrainInfos.CreateInstance(256,256,20,10,.2f,0);
+        spawnScript.SpawnTerrain(terrainInfos);// a mettre au debut de game TD
+        spawnScript.SpawnBase();
+        spawnScript.SpawnPlayer();
+    }
+
+    void GameStart()
+    {
+        spawnScript.enabled = true;
+        TerrainInfos terrainInfos =  TerrainInfos.CreateInstance(256,256,20,10,.2f,0);
+        spawnScript.SpawnTerrain(terrainInfos);// a mettre au debut de game TD
+        spawnScript.SpawnBase();
+        spawnScript.SpawnPlayer();
+        Debug.Log("spawn enemies");
+        StartCoroutine(spawnScript.SpawnEnemies());
     }
 
     public void SaveAll()
     {
+        Debug.Log("on save");
         SaveManager.Save(spawnScript.player);
         SaveManager.Save(spawnScript.player.inputManager.keyBindings.keyBindings);
     }
@@ -33,6 +80,14 @@ public class GameManager : MonoBehaviour
         if(playerData == null)
             return null;
         return PlayerInfos.CreateInstance(SaveManager.LoadPlayer());
+    }
+
+    public PlayerSpells LoadPlayerSpells()
+    {
+        PlayerSpells.PlayerSpellData[] spells = SaveManager.LoadSpells();
+        if(spells == null)
+            return null;
+        return PlayerSpells.CreateInstance(spells);
     }
 
     public KeyBindings LoadKeyBindings()

@@ -26,43 +26,42 @@ public class SpawnScript : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
     }
-    public IEnumerator Spawn()
-    {
-        //terrain instantiaton
-        terrain = Instantiate(terrainPrefab);
 
-        //base instantiation
-        yield return new WaitForSeconds(1);
+    //terrain instantiaton
+    public void SpawnTerrain(TerrainInfos terrainInfos)
+    {
+        terrain = Instantiate(terrainPrefab);
+        terrain.GetComponent<TerrainGenerator>().GenerateTerrain(terrainInfos);
+    }
+    public void SpawnBase()
+    {
         Vector3 basePosition = new(0,terrain.terrainData.GetHeight(128,128),0);
         baseBuilding = Instantiate(baseBuildingPrefab,basePosition, transform.rotation);
         baseBuildingPrefab.transform.position = new(0,200,0);
+    }
 
-        //Player Instantiation
+    public void SpawnPlayer()
+    {
         player = Instantiate(playerPrefab, baseBuilding.playerSpawnPoint);
         PlayerInfos playerInfos = gameManager.LoadPlayerInfos();
+        PlayerSpells playerSpells = gameManager.LoadPlayerSpells();
         KeyBindings keyBindings = gameManager.LoadKeyBindings();
         if(playerInfos != null)
-            player.SetPlayerInfos(gameManager.LoadPlayerInfos());
+            player.SetPlayerInfos(playerInfos);
+        if(playerSpells != null)
+            player.GetPlayerInfos().possessedSpells = playerSpells;
         if(keyBindings != null)
-            player.inputManager.keyBindings = gameManager.LoadKeyBindings();
+            player.inputManager.keyBindings = keyBindings;
+    }
 
+    public IEnumerator SpawnEnemies()
+    {
         //spawnPoints of the enemies instantiation
         for (int i = 0; i < spawnPointsNumber; i++)
         {
+            Debug.Log("spawnPoint");
             spawnPoints.Add(Instantiate(spawnPointPrefab, FindSpawnPosition(), transform.rotation));
         }
-        
-        StartCoroutine(SpawnEnemies());
-    }
-    void Update()//DEBUG
-    {
-        float posY = terrain.transform.position.y;
-        float posyZ = terrain.transform.position.z;
-        float newPosX = terrain.transform.position.x + Time.deltaTime;
-        terrain.transform.position.Set(newPosX, posY, posyZ);
-    }
-    IEnumerator SpawnEnemies()
-    {
         //enemies instantiation
         foreach (var infos in spawnInfos)
         {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DefaultSpawnInfos
   m_EditorClassIdentifier: 
   enemyInfos: {fileID: 11400000, guid: ee305c30255c0204bbf2c16cb69d2dd1, type: 2}
-  enemyNumber: 1
+  enemyNumber: 3

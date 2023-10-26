@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     
-    [SerializeField]
-    private PlayerInfos playerInfos;
+    [SerializeField]private PlayerInfos playerInfos;
     public InputManager inputManager;
 
     

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public static float REDUCTION_COEFF = 100;
     [SerializeField] private EnemyInfos _enemyInfos;
     private GameObject _target;
     private String _name;
@@ -68,6 +69,19 @@ public class Enemy : MonoBehaviour
             _targetInRange = false;
             StartMovement();
         }
+    }
+
+    public bool ReceiveDamage(float damageAmount)
+    {
+        float armorReduction = Mathf.Sqrt(_armor)/Mathf.Sqrt(_armor + REDUCTION_COEFF);//100 is good
+        float realDamage = damageAmount *(1 - armorReduction);
+        _health -= realDamage;
+        if(_health <= 0)
+        {
+            _health = 0;
+            return true;
+        }
+        return false;
     }
 
 

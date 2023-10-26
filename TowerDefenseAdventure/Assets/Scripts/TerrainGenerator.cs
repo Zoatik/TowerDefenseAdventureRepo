@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Terrain))]
 public class TerrainGenerator : MonoBehaviour
 {
-    public TerrainInfos terrainInfos;
+    [NonSerialized] public TerrainInfos terrainInfos;
     public List<TerrainLayer> terrainLayers;
     public List<TreeInfos> treesInfos;
     [Range(0,1)] public float treeTreshHold = .5f;
@@ -22,24 +22,22 @@ public class TerrainGenerator : MonoBehaviour
     {
         //terrain
         terrainPainter = GetComponent<TerrainPainter>();
-        terrain = GetComponent<Terrain>();
-        terrain.terrainData = GenerateTerrain(terrain.terrainData);
-        transform.position = new Vector3(-terrainInfos.width/2,0,-terrainInfos.width/2);
+        terrain = GetComponent<Terrain>();  
         navMeshSurface = GetComponent<NavMeshSurface>();
-        navMeshSurface.BuildNavMesh();
+        
         //trees
         treeTreshHold = Mathf.Clamp(treeTreshHold,0f,1f);
         
     }
-    /*void Update()//DEBUG
-    {
-        terrain.terrainData = GenerateTerrain(terrain.terrainData);
-    }*/
 
-    private TerrainData GenerateTerrain(TerrainData baseTerrainData)
+    public TerrainData GenerateTerrain(TerrainInfos terrainInfos)
     {
-        baseTerrainData.heightmapResolution = terrainInfos.width + 1;
-        baseTerrainData.size = new Vector3(terrainInfos.width, terrainInfos.depth, terrainInfos.height);
+        this.terrainInfos = terrainInfos;
+        TerrainData baseTerrainData = new()
+        {
+            heightmapResolution = terrainInfos.width + 1,
+            size = new Vector3(terrainInfos.width, terrainInfos.depth, terrainInfos.height)
+        };
         float[,] heightValues = GenerateHeights();
         baseTerrainData.SetHeights(0,0,heightValues);
 
@@ -51,6 +49,10 @@ public class TerrainGenerator : MonoBehaviour
 
         //arbres
         GenerateTrees(heightValues);
+
+        transform.position = new Vector3(-terrainInfos.width/2,0,-terrainInfos.width/2);
+        navMeshSurface.BuildNavMesh();
+        
         return baseTerrainData;
     }
 

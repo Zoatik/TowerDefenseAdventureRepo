@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401092852482220679}
-  m_Layer: 0
-  m_Name: Bush_04
+  m_Layer: 3
+  m_Name: bush_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,14 +23,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3241266199762412106}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 39.294113, y: -22.636173, z: -20.301987}
   m_LocalScale: {x: 1.85172, y: 1.8517195, z: 2.7710886}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5154940985853610863}
   - {fileID: 4484109358151142526}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4484109358151307358
 GameObject:
@@ -43,7 +44,7 @@ GameObject:
   - component: {fileID: 4484109358151142526}
   - component: {fileID: 4484109358152469598}
   - component: {fileID: 4484109358153567902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bush_01 (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,12 +58,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4484109358151307358}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.02516462, y: -0.04378867, z: -0.99006116, w: 0.1312565}
   m_LocalPosition: {x: -0.040023297, y: 0.07993123, z: 0.103436105}
   m_LocalScale: {x: 1.1254516, y: 1.1214191, z: 0.6229283}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1401092852482220679}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -84.21001, y: -142.563, z: -22.333}
 --- !u!33 &4484109358152469598
 MeshFilter:
@@ -83,6 +85,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -124,7 +127,7 @@ GameObject:
   - component: {fileID: 5154940985853610863}
   - component: {fileID: 5020900660746660175}
   - component: {fileID: 573525990357942843}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: road_border_03 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,12 +141,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6905194617509091241}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1401092852482220679}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5020900660746660175
 MeshFilter:
@@ -164,6 +168,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

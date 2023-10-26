@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2172024548244770433}
   - component: {fileID: 2172024548245867713}
   - component: {fileID: 519826909665622685}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bush_main_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 2172024548247637713}
   - component: {fileID: 2172024548244770547}
   - component: {fileID: 2172024548245867571}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bush_leafs_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2172024548247637723}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bush_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

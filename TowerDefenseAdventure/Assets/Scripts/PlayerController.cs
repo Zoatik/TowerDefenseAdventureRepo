@@ -9,10 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera _cameraPrefab;
     [SerializeField]
-    private float _walkSpeed = 7.5f;
-    [SerializeField]
-    private float _runSpeed = 11.5f;
-    [SerializeField]
     private float _jumpSpeed = 8.0f;
     [SerializeField]
     private float _lookSpeed = 2.0f;
@@ -26,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private TopDownCombat _topDownCombat;
 
     private PlayerInfos _playerInfos;
+    private Enemy _target = null;
 
     private bool _canMove = true;
     private bool _fpsMode = true;
@@ -45,10 +42,12 @@ public class PlayerController : MonoBehaviour
         _playerInfos = GetComponent<Player>().GetPlayerInfos();
         _playerCamera = Instantiate(_cameraPrefab);
         _cameraBehaviour = _playerCamera.GetComponent<CameraBehaviour>();
+        _topDownCombat = GetComponent<TopDownCombat>();
     }
     void Start()
     {
         agent.speed = _playerInfos.playerData.runSpeed;
+        Debug.Log(agent.speed);
         // Lock cursor
         if(_fpsMode)
         {
@@ -74,8 +73,8 @@ public class PlayerController : MonoBehaviour
             Vector3 right = transform.TransformDirection(Vector3.right);
             // Press Left Shift to run
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float curSpeedX = _canMove ? (isRunning ? _runSpeed : _walkSpeed) * Input.GetAxis("Vertical") : 0;
-            float curSpeedY = _canMove ? (isRunning ? _runSpeed : _walkSpeed) * Input.GetAxis("Horizontal") : 0;
+            float curSpeedX = _canMove ? (isRunning ? _playerInfos.playerData.runSpeed : _playerInfos.playerData.walkSpeed) * Input.GetAxis("Vertical") : 0;
+            float curSpeedY = _canMove ? (isRunning ? _playerInfos.playerData.runSpeed : _playerInfos.playerData.walkSpeed) * Input.GetAxis("Horizontal") : 0;
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
@@ -113,24 +112,52 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //TOPDOWN
             if (!_cameraBehaviour._fpsToTopDown)
             {
                 
                 _cameraBehaviour.FollowTopDown();
+                if(_target != null)
+                {
+                    agent.destination = _target.transform.position;
+
+                }
                 if(inputManager.GetKey(KeyBindingActions.TopDownMove))
                 {
                     Ray ray = _playerCamera.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    
-                    if(Physics.Raycast(ray,out hit))
+
+                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    {
+                        _target = null;
+                        if (hit.collider.CompareTag("Floor"))
+                        {
+                            agent.stoppingDistance = 0;
+                            agent.destination = hit.point;
+                        }
+                        if (hit.collider.CompareTag("Enemy"))
+                        {
+                            PlayerSpells.PlayerSpellData spellData = _playerInfos.possessedSpells.playerSpellData[(int)TopDownCombat.AttackSpells.Basic];
+                            agent.stoppingDistance = spellData.baseRange;
+                            
+                            _topDownCombat.target = hit.collider.GetComponent<Enemy>();
+                            _target = _topDownCombat.target;
+                            _topDownCombat.Attack(TopDownCombat.AttackSpells.Basic);
+                        }
+                    }
+                }
+                if(inputManager.GetKey(KeyBindingActions.TopDownSelect))
+                {
+                    Ray ray = _playerCamera.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out RaycastHit hit))
                     {
                         if (hit.collider.CompareTag("Floor"))
                         {
-                            agent.destination = hit.point;
-                        }
-                        if(hit.collider.CompareTag("Enemy"))
-                        {
                             
+                        }
+                        if (hit.collider.CompareTag("Enemy"))
+                        {
+                            _topDownCombat.target = hit.collider.GetComponent<Enemy>();
                         }
                     }
                 }

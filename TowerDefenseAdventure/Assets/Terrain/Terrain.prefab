@@ -107,14 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc8c9849dc7fd54e8018199dd316ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainInfos: {fileID: 11400000, guid: 31d9825eb84c9e34688faa2d4b185bea, type: 2}
   terrainLayers:
   - {fileID: 8574412962073106934, guid: a5b37f3d6310f7b4aaa13aa0d5c5b11c, type: 2}
   treesInfos:
   - {fileID: 11400000, guid: e694750360006e84699a1904cf9f2f1e, type: 2}
   - {fileID: 11400000, guid: 48c47b004c8d1ad44a0e77b7c55a82b6, type: 2}
-  - {fileID: 11400000, guid: acc968a45ad5f63458793505a9b8bab6, type: 2}
-  - {fileID: 11400000, guid: 7ad449719f76ff9438adb9f37d12dabc, type: 2}
+  - {fileID: 11400000, guid: 020d7d43389ec6d45ba1c9cdb9761a46, type: 2}
+  - {fileID: 11400000, guid: f6370e8b50008d94197da028e0b4901c, type: 2}
   - {fileID: 11400000, guid: c7f62c9c90145374faa9509b6fda6d7e, type: 2}
   treeTreshHold: 0.245
   treesDensity: 0.883

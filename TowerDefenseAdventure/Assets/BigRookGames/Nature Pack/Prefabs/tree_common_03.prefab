@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2920258591700155264}
   - component: {fileID: 2920258591701449632}
   - component: {fileID: 2920258591702448480}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: leafs_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2920258591700155266}
   - component: {fileID: 2920258591701449634}
   - component: {fileID: 2920258591702448482}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tree_common_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
